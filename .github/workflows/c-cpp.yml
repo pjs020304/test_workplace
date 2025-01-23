@@ -1,6 +1,6 @@
 name: Reusable workflow example
 on:
-  workflow_call:
+  push:
     inputs:   # 입력 정의
       input1:
         required: true
