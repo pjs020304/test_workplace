@@ -1,19 +1,19 @@
-name: C/C++ CI
-
+name: Reusable workflow example
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
+  workflow_call:
+    inputs:   # 입력 정의
+      input1:
+        required: true
+        type: string
+    outputs:  # 출력 정의
+      output1:
+        description: "The first output string"
+        value: ${{ jobs.example_job.outputs.output1 }}
 jobs:
-  build:
-
+  example_job:
     runs-on: ubuntu-latest
-
+    outputs:
+      output1: ${{ steps.step1.outputs.result }}
     steps:
-    - uses: actions/checkout@v4
-    - name: make
-      run: make
-    - name: make check
-      run: make check
+    - id: step1    # input1에 10을 더해서 output result에 기록
+      run: echo "result=`expr ${{ inputs.input1 }} + 10`" >> $GITHUB_OUTPUT
