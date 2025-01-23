@@ -1,5 +1,5 @@
 name: Reusable workflow example
-on:
+on: push
   workflow_call:
     inputs:   # 입력 정의
       input1:
